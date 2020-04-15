@@ -3,17 +3,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# dectect docker
-if ! [ -x "$(command -v docker)" ]; then
-    echo 'ERROR: docker not found, You can goto https://www.docker.com/ install' >&2
-    exit 1
-fi
-
-GIT_ROOT=$(git rev-parse --show-toplevel)
-readonly ROOT=${GIT_ROOT}
-readonly DOCKER_NAMESPACE="work4fun"
-readonly DOCKER=$(which docker)
-readonly DOCKERFILE_NAME="Dockerfile"
+SCRIPTS_DIR="$(dirname "${BASH_SOURCE}")"
+source "${SCRIPTS_DIR}/common.sh"
 
 get_apps() {
     ls -d */ | grep -v scripts | sed 's/\///g'
@@ -53,8 +44,13 @@ if function_exists "pre_build"; then
     pre_build
 fi
 
-$DOCKER build "$ROOT/$app" -f "$ROOT/$app/${DOCKERFILE_NAME}" -t "$(make_app_name):$(make_version)"
+repository_id="$(make_app_name):$(make_version)"
+
+$DOCKER build "$ROOT/$app" -f "$ROOT/$app/${DOCKERFILE_NAME}" -t "$repository_id"
 
 if function_exists "post_build"; then
     post_build
 fi
+
+# Put the name of the last compilation in an file
+update_latest_id "${repository_id}"

@@ -7,3 +7,5 @@ default help:
 .PHONY: build
 build:
 	@bash ./scripts/build.sh
+push:
+	@bash ./scripts/push.sh
