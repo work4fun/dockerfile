@@ -52,5 +52,5 @@ if function_exists "post_build"; then
     post_build
 fi
 
-# Put the name of the last compilation in an file
+# Put the name of the last compilation in a file
 update_latest_id "${repository_id}"

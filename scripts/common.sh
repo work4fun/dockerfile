@@ -12,7 +12,7 @@ readonly DOCKER_NAMESPACE="work4fun"
 readonly DOCKER=$(which docker)
 readonly DOCKERFILE_NAME="Dockerfile"
 
-# Put the name of the last compilation in an file
+# Put the name of the last compilation in a file
 readonly LATEST_BUILD_IMAGE_FILE_NAME="WORK4FUN_LATEST_ID"
 
 function update_latest_id() {
