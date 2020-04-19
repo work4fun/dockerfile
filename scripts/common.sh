@@ -22,3 +22,7 @@ function update_latest_id() {
 function get_latest_id() {
     cat "${GIT_ROOT}/${LATEST_BUILD_IMAGE_FILE_NAME}"
 }
+
+function get_apps() {
+    ls -d */ | grep -v scripts | sed 's/\///g'
+}

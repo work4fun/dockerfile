@@ -6,10 +6,6 @@ set -o pipefail
 SCRIPTS_DIR="$(dirname "${BASH_SOURCE}")"
 source "${SCRIPTS_DIR}/common.sh"
 
-get_apps() {
-    ls -d */ | grep -v scripts | sed 's/\///g'
-}
-
 make_app_name() {
     echo "$DOCKER_NAMESPACE/$app"
 }
