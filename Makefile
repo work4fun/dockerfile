@@ -12,6 +12,7 @@ default help:
 	@echo "The commands are:"
 	@echo "build:  Build docker image"
 	@echo "push:   Push docker image to hub.docker"
+	@echo "phony:  Generate PhonyMakefile"
 
 .PHONY: phony
 phony:
